@@ -51,3 +51,5 @@ Centralized monitoring and logging via ECS and CloudWatch (optional).
 Automate updates and rollbacks through ECS service management.
 
 # Architecture Diagram
+
+![image alt](https://github.com/hashim1sharif/Next-Gen-demo/blob/9a3754586b80cfbc4dee30b08a723bad9536e01a/Images/Architecture%20Diagram.png)
