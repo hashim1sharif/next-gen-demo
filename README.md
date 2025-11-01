@@ -49,3 +49,5 @@ Simplified Operations and Maintenance
 Centralized monitoring and logging via ECS and CloudWatch (optional).
 
 Automate updates and rollbacks through ECS service management.
+
+# Architecture Diagram
