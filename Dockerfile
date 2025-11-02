@@ -1,12 +1,19 @@
-# Serve static files with Nginx
-FROM nginx:alpine
+FROM node:20-alpine
+WORKDIR /app
 
-# Remove default site and copy your build
-RUN rm -rf /usr/share/nginx/html/*
-COPY . /usr/share/nginx/html
+# Install deps
+COPY ["package.json", "./"]
+RUN npm install --omit=dev --no-audit --no-fund
 
-# (Optional) Smaller image by removing VCS/hidden junk if present
-# RUN find /usr/share/nginx/html -name ".git" -type d -exec rm -rf {} +
+# Copy backend + frontend
+COPY ["api", "api"]
+COPY ["index.html", "style.css", "app.js", "./"]
+COPY ["Images", "Images"]
+COPY ["logo", "logo"]
+COPY ["README.md", "./"]
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENV NODE_ENV=production
+EXPOSE 3000
+
+# Start server (no migrations)
+CMD ["node", "api/src/index.js"]

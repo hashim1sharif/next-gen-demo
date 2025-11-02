@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: pg
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - nextnet
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextgen
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: appdb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_SSL: "false"
+    ports:
+      - "3000:3000"
+    networks:
+      - nextnet
+
+networks:
+  nextnet:
+
+volumes:
+  db_data:
