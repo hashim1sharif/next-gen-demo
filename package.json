@@ -1,13 +1,10 @@
 {
-  "name": "nextgen-webapi",
-  "private": true,
-  "type": "module",
+  "name": "nextgen-demo",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node api/src/index.js",
-    "migrate": "node api/src/migrate.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "pg": "^8.11.5"
+    "express": "^4.18.2"
   }
 }

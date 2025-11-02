@@ -1,19 +1,11 @@
 FROM node:20-alpine
 WORKDIR /app
 
-# Install deps
-COPY ["package.json", "./"]
-RUN npm install --omit=dev --no-audit --no-fund
+COPY package*.json ./
+RUN npm ci --omit=dev
 
-# Copy backend + frontend
-COPY ["api", "api"]
-COPY ["index.html", "style.css", "app.js", "./"]
-COPY ["Images", "Images"]
-COPY ["logo", "logo"]
-COPY ["README.md", "./"]
+COPY . .
 
 ENV NODE_ENV=production
 EXPOSE 3000
-
-# Start server (no migrations)
-CMD ["node", "api/src/index.js"]
+CMD ["npm", "start"]
